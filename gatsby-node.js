@@ -23,24 +23,22 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve('./src/templates/blog.jsx')
   const res = await graphql(`
     query {
-      allMarkdownRemark {
+      allContentfulGatsbyTutorial {
         edges {
           node {
-            fields {
               slug
-            }
           }
         }
       }
     }
   `)
 
-  res.data.allMarkdownRemark.edges.forEach((edge) => {
+  res.data.allContentfulGatsbyTutorial.edges.forEach((edge) => {
     createPage({
       component: blogTemplate,
-      path: `/blog/${edge.node.fields.slug}`,
+      path: `/blog/${edge.node.slug}`,
       context: {
-        slug: edge.node.fields.slug
+        slug: edge.node.slug
       }
     })
   })
