@@ -24,14 +24,24 @@ const Blog = (props) => {
   const title = props.data.contentfulGatsbyTutorial.title
   const date = props.data.contentfulGatsbyTutorial.publishedDate
   const body = props.data.contentfulGatsbyTutorial.body.raw
-  const altImg = props.data.contentfulGatsbyTutorial.body.references[0].title
-  const srcImg = props.data.contentfulGatsbyTutorial.body.references[0].url
+  const references = props.data.contentfulGatsbyTutorial.body.references
+  
+  let altImg = ''
+  let srcImg = ''
+
+  if(references.length > 0){
+    altImg = references[0].title
+    srcImg = references[0].url
+  }
+
+  // console.log('reference:', props.data.contentfulGatsbyTutorial.body.references.length)
+
   return (
     <Layout>
       <h1>{title}</h1>
       <p>{date}</p>
       {documentToReactComponents(JSON.parse(body))}
-      <img alt={altImg} src={srcImg} />
+      {references.length > 0 && <img src={srcImg} alt={altImg} />}
     </Layout>
   )
 }
