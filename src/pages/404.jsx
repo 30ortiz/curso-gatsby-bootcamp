@@ -1,9 +1,16 @@
 import React from "react"
 
 import Layout from "../components/layout";
+import Head from "../components/head";
 
-export default function Error404() {
-  return <Layout>
-      <div> Error. No se encuentra</div>
-    </Layout>
+const NotFoundPage = () =>{
+    return (
+        <Layout>
+            <Head title={"Not Found Page"} />
+            <h1>Page not found</h1>
+            <p><a href="/">home</a></p>
+        </Layout>
+    )
 }
+  
+export default NotFoundPage
